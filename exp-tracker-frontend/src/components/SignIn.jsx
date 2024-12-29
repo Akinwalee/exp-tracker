@@ -8,18 +8,17 @@ const SignIn = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    // try {
-    //   const response = await login(email, password);
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   // try {
+  //   //   const response = await login(email, password);
 
-    //   if (response.ok) {
-    //     window.location.href = '/dashboard';
-    //   }
-    // } catch (err) {
-    //   setError('Invalid credentials');
-    // }
-  };
+  //    
+  //   }
+  //   // } catch (err) {
+  //   //   setError('Invalid credentials');
+  //   // }
+  // };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background py-12 px-4 sm:px-6 lg:px-8">
