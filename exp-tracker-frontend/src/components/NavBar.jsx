@@ -20,8 +20,8 @@ const Navbar = () => {
             <Link to="/" className="text-gray-500 hover:text-gray-900">Home</Link>
             <Link to="/" className="text-gray-500 hover:text-gray-900">Features</Link>
             <Link to="/" className="text-gray-500 hover:text-gray-900">Pricing</Link>
-            <Link to="/" className="text-gray-500 hover:text-gray-900">Sign In</Link>
-            <Link to="/" 
+            <Link to="/signin" className="text-gray-500 hover:text-gray-900">Sign In</Link>
+            <Link to="/signup" 
               className="bg-primary text-white px-4 py-2 rounded-md hover:bg-blue-700"
             >
               Sign Up
