@@ -8,7 +8,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="col-span-1">
-            <span className="text-xl font-bold text-primary">FinanceApp</span>
+            <span className="text-xl font-bold text-primary">Expense Tracker</span>
             <p className="mt-2 text-sm text-gray-500">
               Take control of your financial future
             </p>
@@ -43,7 +43,7 @@ const Footer = () => {
         </div>
         <div className="mt-8 border-t border-gray-200 pt-8">
           <p className="text-base text-gray-400 text-center">
-            © 2024 FinanceApp. All rights reserved.
+            © 2024 Expense Tracker. All rights reserved.
           </p>
         </div>
       </div>

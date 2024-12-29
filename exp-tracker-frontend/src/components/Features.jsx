@@ -1,7 +1,8 @@
 import React from 'react';
 import { 
   ChartBarIcon, 
-  CreditCardIcon
+  CreditCardIcon,
+  WalletIcon
 } from '@heroicons/react/24/outline';
 
 const features = [
@@ -16,7 +17,7 @@ const features = [
     description: 'Set and monitor budget limits across different categories.'
   },
   {
-    icon: ChartBarIcon,
+    icon: WalletIcon,
     title: 'Savings Goals',
     description: 'Create and track savings goals with automated insights.'
   }
