@@ -2,7 +2,7 @@ import React from 'react';
 import Navbar from '../components/NavBar';
 import Overview from '../components/Overview';
 import Transactions from '../components/Transactions';
-// import Savings from '../components/Savings';
+import Savings from '../components/Savings';
 // import BudgetManagement from '../components/dashboard/BudgetManagement';
 
 const Dashboard = () => {
@@ -13,8 +13,8 @@ const Dashboard = () => {
         <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
         <Overview />
         <Transactions />
-        {/*<Savings />
-        <BudgetManagement /> */}
+        <Savings />
+        {/*<BudgetManagement /> */}
       </div>
     </div>
   );
