@@ -1,0 +1,20 @@
+import fs from 'fs';
+import path from 'path';
+
+const logDir = path.join(__dirname, './logs');
+const accessLogPath = path.join(logDir, 'access.log');
+
+// Ensure log directory exists
+if (!fs.existsSync(logDir)) {
+    fs.mkdirSync(logDir, { recursive: true });
+}
+
+// Create the log file if it doesn't exist
+if (!fs.existsSync(accessLogPath)) {
+    fs.writeFileSync(accessLogPath, '');
+}
+
+// Use the log file in your logger (e.g., morgan)
+import morgan from 'morgan';
+const accessLogStream = fs.createWriteStream(accessLogPath, { flags: 'a' });
+app.use(morgan('combined', { stream: accessLogStream }));
