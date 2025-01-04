@@ -10,5 +10,6 @@ const router = express.Router();
 router.post('/register', AuthController.register);
 router.post('/login', AuthController.login);
 router.post('/refresh-token', refreshJWT); // Add this route for refreshing tokens
+router.get('/validate-token', AuthController.validateToken); // Route for validating tokens
 
 export default router;

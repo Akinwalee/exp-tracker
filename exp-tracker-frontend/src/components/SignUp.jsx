@@ -1,12 +1,18 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
 const SignUp = () => {
+  const { user } = useAuth(); // Access the user state from AuthContext
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
+
+  if (user) {
+    window.location.href = '/dashboard'; // Redirect logged-in users to dashboard
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -14,12 +20,26 @@ const SignUp = () => {
       setError("Passwords don't match");
       return;
     }
-    // try {
-    //   await register(fullName, email, password);
-    //   // Handle successful registration (redirect to sign in)
-    // } catch (err) {
-    //   setError('Registration failed');
-    // }
+    try {
+      const response = await fetch('http://localhost:5000/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name: fullName, email, password }),
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        // Handle successful registration (redirect to sign in)
+        window.location.href = '/signin';
+      } else {
+        setError(data.error || 'Registration failed');
+      }
+    } catch (error) {
+      setError('Registration failed');
+      console.error('Login error:', error);
+    }
   };
 
   return (
@@ -65,7 +85,7 @@ const SignUp = () => {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder -gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
                 placeholder="Password"
               />
             </div>
@@ -83,7 +103,7 @@ const SignUp = () => {
               />
             </div>
           </div>
-          {error && <p className="text-red-500 text-sm">{error}</p>}
+          {error && <p className="text-red-500 text-sm">{error}</p>} {/* Display error message */}
           <div>
             <button type="submit" className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
               Sign Up

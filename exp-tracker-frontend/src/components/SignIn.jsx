@@ -1,24 +1,29 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Navbar from './NavBar';
-
+import { useAuth } from '../contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const SignIn = () => {
+  const { user, login } = useAuth(); // Access the user state and login function from AuthContext
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   // try {
-  //   //   const response = await login(email, password);
+  if (user) {
+    navigate('/dashboard'); // Redirect logged-in users to dashboard
+  }
 
-  //    
-  //   }
-  //   // } catch (err) {
-  //   //   setError('Invalid credentials');
-  //   // }
-  // };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await login(email, password); // Call the login function from AuthContext
+      navigate('/dashboard'); // Redirect to dashboard after successful login
+    } catch (error) {
+      console.error(error)
+      setError('Invalid credentials'); // Handle error
+    }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background py-12 px-4 sm:px-6 lg:px-8">
@@ -52,7 +57,7 @@ const SignIn = () => {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus :outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
                 placeholder="Password"
               />
             </div>
@@ -73,7 +78,7 @@ const SignIn = () => {
             </button>
           </div>
           <div className="text-center">
-            <p className="text-sm text-gray-600">Don't have an account? <Link to="/signup" className="font-medium text-primary hover:text-blue-700">Sign Up</Link></p>
+            <p className="text-sm text-gray-600">Don&apos;t have an account? <Link to="/signup" className="font-medium text-primary hover:text-blue-700">Sign Up</Link></p>
           </div>
         </form>
       </div>

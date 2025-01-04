@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { user } = useAuth(); // Access the user state from AuthContext
 
   return (
     <nav className="bg-white shadow-sm">
@@ -20,12 +22,18 @@ const Navbar = () => {
             <Link to="/" className="text-gray-500 hover:text-gray-900">Home</Link>
             <Link to="/" className="text-gray-500 hover:text-gray-900">Features</Link>
             <Link to="/" className="text-gray-500 hover:text-gray-900">Pricing</Link>
-            <Link to="/signin" className="text-gray-500 hover:text-gray-900">Sign In</Link>
-            <Link to="/signup" 
-              className="bg-primary text-white px-4 py-2 rounded-md hover:bg-blue-700"
-            >
-              Sign Up
-            </Link>
+            {user ? (
+              <Link to="/dashboard" className="text-gray-500 hover:text-gray-900">Dashboard</Link>
+            ) : (
+              <>
+                <Link to="/signin" className="text-gray-500 hover:text-gray-900">Sign In</Link>
+                <Link to="/signup" 
+                  className="bg-primary text-white px-4 py-2 rounded-md hover:bg-blue-700"
+                >
+                  Sign Up
+                </Link>
+              </>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -51,8 +59,14 @@ const Navbar = () => {
             <Link to="/" className="block px-3 py-2 text-gray-500 hover:text-gray-900">Home</Link>
             <Link to="/" className="block px-3 py-2 text-gray-500 hover:text-gray-900">Features</Link>
             <Link to="/" className="block px-3 py-2 text-gray-500 hover:text-gray-900">Pricing</Link>
-            <Link to="/" className="block px-3 py-2 text-gray-500 hover:text-gray-900">Sign In</Link>
-            <Link to="/" className="block px-3 py-2 text-gray-500 hover:text-gray-900">Sign Up</Link>
+            {user ? (
+              <Link to="/dashboard" className="block px-3 py-2 text-gray-500 hover:text-gray-900">Dashboard</Link>
+            ) : (
+              <>
+                <Link to="/signin" className="block px-3 py-2 text-gray-500 hover:text-gray-900">Sign In</Link>
+                <Link to="/signup" className="block px-3 py-2 text-gray-500 hover:text-gray-900">Sign Up</Link>
+              </>
+            )}
           </div>
         </div>
       )}
