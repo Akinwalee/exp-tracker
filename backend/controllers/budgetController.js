@@ -5,14 +5,14 @@ export const BudgetController = {
     // Create a new budget
     createBudget: async (req, res) => {
         try {
-            const { amount, duration } = req.body;
+            const { amount, duration, budget_limit = null } = req.body;
             const userId = req.user.id;
 
-            if (!amount || !duration) {
-                return res.status(400).json({ message: 'Amount and duration are required' });
+            if (!amount || !duration || !budget_limit) {
+                return res.status(400).json({ message: 'Amount, duration, and budget limit are required' });
             }
 
-            const budgetId = await BudgetService.createBudget(userId, amount, duration);
+            const budgetId = await BudgetService.createBudget(userId, amount, duration, budget_limit);
             io.to(userId).emit('budgetUpdated', { message: 'New budget created' });
 
             res.status(201).json({ budgetId, message: 'Budget created successfully' });
