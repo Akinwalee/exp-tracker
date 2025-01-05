@@ -41,7 +41,9 @@ CREATE TABLE budgets (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
     category VARCHAR(50),
-    budget_limit DECIMAL(10, 2) NOT NULL,
+    amount DECIMAL(10, 2) NOT NULL,
+    budget_limit DECIMAL(10, 2) DEFAULT 0,
+    duration INT NOT NULL,
     start_date DATE NOT NULL,
     end_date DATE NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -94,5 +96,15 @@ CREATE TABLE audit_logs (
     action VARCHAR(255) NOT NULL,
     details TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE incomes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    amount DECIMAL(10, 2) NOT NULL,
+    source VARCHAR(255) NOT NULL,
+    description TEXT,
+    date DATE,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
