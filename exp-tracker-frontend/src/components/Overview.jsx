@@ -1,8 +1,8 @@
-import React from 'react';
+import Transactions from "./Transactions";
 
 const Overview = () => {
   return (
-    <div className="bg-white shadow rounded-lg p-6 mb-6">
+    <><div className="bg-white shadow rounded-lg p-6 mb-6">
       <h2 className="text-xl font-semibold text-gray-900">Overview</h2>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-4">
         <div className="bg-primary text-white p-4 rounded-lg">
@@ -22,7 +22,9 @@ const Overview = () => {
           <p className="text-2xl">75%</p>
         </div>
       </div>
-    </div>
+    </div><>
+    <Transactions />
+      </></>
   );
 };
 
