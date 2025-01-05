@@ -30,6 +30,7 @@ import incomeRoutes from './routes/income.js';
 import savingsRoutes from './routes/savings.js';
 import notificationRoutes from './routes/notifications.js';
 import paystackRoutes from './routes/paystack.js';
+import budgetRoutes from './routes/budgets.js';
 import { fileURLToPath } from 'url';
 
 // ES module workaround for __dirname
@@ -107,6 +108,7 @@ app.use('/api/income', incomeRoutes);
 app.use('/api/savings', savingsRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/paystack', paystackRoutes);
+app.use('/api/budgets', budgetRoutes);
 
 // Global Error Handler
 app.use(errorHandler);
