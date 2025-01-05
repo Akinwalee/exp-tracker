@@ -2,12 +2,12 @@ import db from '../utils/db.js';
 
 export const BudgetModel = {
   // Create a new budget for the user
-  create: async (userId, amount, duration) => {
+  create: async (userId, amount, duration, budget_limit) => {
     const query = `
-      INSERT INTO budgets (user_id, amount, duration, created_at)
-      VALUES (?, ?, ?, NOW())
+      INSERT INTO budgets (user_id, amount, duration, budget_limit, created_at)
+      VALUES (?, ?, ?, ?, NOW())
     `;
-    const [result] = await db.execute(query, [userId, amount, duration]);
+    const [result] = await db.execute(query, [userId, amount, duration, budget_limit]);
     return result.insertId;
   },
 
