@@ -78,8 +78,8 @@ Prerequisites
 Steps to Run Locally
 	1.	Clone the Repository
 
-git clone https://github.com/your-repo-name/expense-tracking.git  
-cd expense-tracking  
+git clone https://github.com/Akinwale/exp-tracking.git  
+cd exp-tracking  
 
 
 	2.	Install Dependencies
