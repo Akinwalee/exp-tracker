@@ -1,4 +1,4 @@
-Expense Tracking Management System
+# Expense Tracking Management System
 
 Overview
 
@@ -104,7 +104,7 @@ npm run dev
 
 
 	5.	Access the Application
-	•	Frontend: http://localhost:3000
+	•	Frontend: http://localhost:5173
 	•	Backend: http://localhost:5000
 
 Testing the APIs
@@ -123,6 +123,3 @@ Team Members
 	•	Cynthia Ihuoma – Backend Developer
 	•	Chukwuebuka Okoye – Backend Developer
 
-License
-
-This project is licensed under the MIT License.
