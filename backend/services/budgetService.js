@@ -1,6 +1,6 @@
 import { BudgetModel } from '../models/BudgetModel.js';
-import { ExpenseModel } from '../models/ExpenseModel.js';
-import { IncomeModel } from '../models/IncomeModel.js';
+import { ExpenseModel } from '../models/expenseModel.js';
+import { IncomeModel } from '../models/incomeModel.js';
 
 export const BudgetService = {
   // Create a new budget
