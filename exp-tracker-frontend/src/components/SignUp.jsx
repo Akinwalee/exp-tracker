@@ -27,6 +27,7 @@ const SignUp = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ name: fullName, email, password }),
+        credentials: 'include', // Include credentials in CORS requests
       });
 
       const data = await response.json();
