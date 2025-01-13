@@ -8,7 +8,7 @@ const Navbar = () => {
   const { user } = useAuth(); // Access the user state from AuthContext
 
   return (
-    <nav className="bg-white shadow-sm">
+    <nav className="sticky top-0 bg-gray-50 shadow-sm cursor-pointer">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
@@ -28,7 +28,7 @@ const Navbar = () => {
               <>
                 <Link to="/signin" className="text-gray-500 hover:text-gray-900">Sign In</Link>
                 <Link to="/signup" 
-                  className="bg-primary text-white px-4 py-2 rounded-md hover:bg-blue-700"
+                  className="bg-primary text-white px-4 py-2 rounded-md hover:text-gray-100 hover:bg-blue-700"
                 >
                   Sign Up
                 </Link>
