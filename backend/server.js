@@ -44,41 +44,29 @@ const serviceAccount = JSON.parse(fs.readFileSync(serviceAccountPath, 'utf8'));
 // Load environment variables
 dotenv.config();
 
+// Verify environment variables
+console.log('FRONTEND_URL:', process.env.FRONTEND_URL);
+
 // Initialize Express App and HTTP Server
 const app = express();
 const httpServer = http.createServer(app);
 
-// Initialize Socket.IO
-const io = new Server(httpServer, {
-  cors: {
-    origin: process.env.FRONTEND_URL,
-    credentials: true,
-    methods: ['GET', 'POST'],
-  },
-});
-
-// Handle WebSocket Events
-io.on('connection', (socket) => {
-  console.log('A user connected:', socket.id);
-
-  // Example: Custom events
-  socket.on('example_event', (data) => {
-    console.log('Received example_event:', data);
-    socket.emit('example_response', { message: 'Hello from server!' });
-  });
-
-  // Handle disconnections
-  socket.on('disconnect', () => {
-    console.log('A user disconnected:', socket.id);
-  });
-});
-
-// Attach Socket.IO instance to the app for use in other modules
-app.set('io', io);
-
 // Apply Middleware
 applySecurityMiddleware(app); // Custom security middleware
-app.use(cors({ origin: process.env.FRONTEND_URL, credentials: true })); // CORS
+
+// Allow multiple origins
+const allowedOrigins = [process.env.FRONTEND_URL, 'http://127.0.0.1:5173'];
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+}));
+
 app.use(express.json()); // JSON parsing
 app.use(morgan('dev')); // Logging
 app.use(hpp()); // Prevent HTTP Parameter Pollution
@@ -114,8 +102,32 @@ app.use('/api/budgets', budgetRoutes);
 app.use(errorHandler);
 
 // Initialize Socket.IO
-socketInit(io);
-handleSockets(io);
+const io = new Server(httpServer, {
+  cors: {
+    origin: allowedOrigins,
+    credentials: true,
+    methods: ['GET', 'POST'],
+  },
+});
+
+// Handle WebSocket Events
+io.on('connection', (socket) => {
+  console.log('A user connected:', socket.id);
+
+  // Example: Custom events
+  socket.on('example_event', (data) => {
+    console.log('Received example_event:', data);
+    socket.emit('example_response', { message: 'Hello from server!' });
+  });
+
+  // Handle disconnections
+  socket.on('disconnect', () => {
+    console.log('A user disconnected:', socket.id);
+  });
+});
+
+// Attach Socket.IO instance to the app for use in other modules
+app.set('io', io);
 
 // Define a route for the root path
 app.get('/', (req, res) => {
