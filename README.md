@@ -48,14 +48,14 @@ Backend
 
 Frontend
 	1.	React
-	•	Component-based architecture for reusable, dynamic UI elements.
-	•	Features such as react-dom ensure smooth rendering of React components.
+	- Component-based architecture for reusable, dynamic UI elements.
+	-	Features such as react-dom ensure smooth rendering of React components.
 	2.	Vite
-	•	Fast development server with hot module replacement (HMR) for an optimized workflow.
+	- Fast development server with hot module replacement (HMR) for an optimized workflow.
 	3.	Dependencies
-	•	@heroicons/react: SVG icons for enhancing the UI.
-	•	axios: HTTP client for seamless backend communication.
-	•	react-circular-progressbar: Visualizes progress for budgets and savings goals.
+	-	@heroicons/react: SVG icons for enhancing the UI.
+	-	axios: HTTP client for seamless backend communication.
+	-	react-circular-progressbar: Visualizes progress for budgets and savings goals.
 
 Project Structure
 
