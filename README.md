@@ -46,7 +46,7 @@ Backend
 	10.	Environment Configuration
 	•	dotenv: Secures sensitive credentials (e.g., database, API keys).
 
-Frontend
+Frontend \
 	1.	React
 	- Component-based architecture for reusable, dynamic UI elements.
 	-	Features such as react-dom ensure smooth rendering of React components.
