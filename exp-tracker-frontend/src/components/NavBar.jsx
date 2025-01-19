@@ -1,11 +1,21 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { user } = useAuth(); // Access the user state from AuthContext
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate('/');
+    } catch (error) {
+      console.error('Failed to logout', error);
+    }
+  }
 
   return (
     <nav className="sticky top-0 bg-gray-50 shadow-sm cursor-pointer">
@@ -26,7 +36,15 @@ const Navbar = () => {
             </div>
             <div className="flex items-center space-x-4">
             {user ? (
+              <>
               <Link to="/dashboard" className="text-gray-500 hover:text-gray-900">Dashboard</Link>
+              <button
+                    onClick={handleLogout}
+                    className="text-white bg-red-500 px-4 py-2 rounded-md hover:bg-red-600"
+                  >
+                    Logout
+              </button>
+              </>
             ) : (
               <>
                 <Link to="/signin" className="text-gray-500 hover:text-gray-900">Sign In</Link>
@@ -64,7 +82,15 @@ const Navbar = () => {
             <Link to="/" className="block px-3 py-2 text-gray-500 hover:text-gray-900 hover:bg-gray-200">Features</Link>
             <Link to="/" className="block px-3 py-2 text-gray-500 hover:text-gray-900 hover:bg-gray-200">Pricing</Link>
             {user ? (
+              <>
               <Link to="/dashboard" className="block px-3 py-2 text-gray-500 hover:text-gray-900">Dashboard</Link>
+              <button
+                onClick={handleLogout}
+                className="block w-full text-left px-3 py-2 text-red-500 hover:text-red-700"
+              >
+                Logout
+              </button>
+              </>
             ) : (
               <>
                 <Link to="/signin" className="block px-3 py-2 text-gray-500 hover:text-gray-900 hover:bg-gray-200">Sign In</Link>

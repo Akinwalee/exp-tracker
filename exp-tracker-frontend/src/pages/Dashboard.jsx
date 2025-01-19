@@ -6,12 +6,14 @@ import BudgetManagement from '../components/BudgetManagement';
 import ProtectedRoute from '../components/ProtectedRoute';
 import AddIncome from '../components/AddIncome';
 import IncomeList from '../components/IncomeList';
+import Navbar from '../components/NavBar';
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState('overview'); // Default active tab
 
   return (
     <ProtectedRoute>
+      <Navbar />
       <div className="flex bg-background min-h-screen">
         <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
         <div className="w-3/4 p-4">
