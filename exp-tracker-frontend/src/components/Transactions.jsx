@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const initialTransactions = [
+const initialTransactions = JSON.parse(localStorage.getItem('transactions')) || [
   { id: 1, date: '2024-03-15', description: 'Grocery Shopping', amount: -120, category: 'Food' },
   { id: 2, date: '2024-03-14', description: 'Salary Deposit', amount: 3000, category: 'Income' },
   { id: 3, date: '2024-03-13', description: 'Electric Bill', amount: -85, category: 'Utilities' },
@@ -15,6 +15,10 @@ const Transactions = () => {
     amount: '',
     category: '',
   });
+
+  useEffect(() => {
+    localStorage.setItem('transactions', JSON.stringify(transactions));
+  }, [transactions]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
